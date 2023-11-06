@@ -1,0 +1,10 @@
+{
+    "editor.defaultFoldingRangeProvider": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "prettier.tabWidth": 2,
+    "prettier.singleQuote": true,
+    "prettier.trailingComma": "all",
+    "prettier.semi": true,
+    "prettier.printWidth": 100,
+   
+}
