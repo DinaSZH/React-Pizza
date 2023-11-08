@@ -32,15 +32,17 @@ function Sort({orderSort, onClickOrder}) {
 
     useEffect(() => {
       const handleClickOutside = (event) => {
-        if(!sortRef.current.contains(event.target)){
+        const path = event.composedPath()
+  
+        if (!path.includes(sortRef.current)) {
           setOpen(false);
           setOpenOrder(false);
         }
-      }
+     } 
 
       document.body.addEventListener('click', handleClickOutside);
 
-      return () => document.body.addEventListener('click', handleClickOutside);
+      return () => {document.body.addEventListener('click', handleClickOutside);}
       
       
     }, [])
