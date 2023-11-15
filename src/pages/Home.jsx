@@ -1,8 +1,7 @@
 import React, { useRef } from "react"
-import axios from "axios";
 import qs from 'qs'
 import { useEffect, useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import PizzaBlock from '../components/PizzaBlock';
 import Sort, { sortList } from '../components/Sort';
@@ -22,12 +21,10 @@ export const Home = () => {
   const isMounted = useRef(false);
 
   const {items, status} = useSelector((state) => state.pizza)
-  const {categoryId, sort, currentPage} = useSelector((state) => state.filter)
+  const {categoryId, sort, currentPage, search} = useSelector((state) => state.filter)
 
  
     const [orderSort, setOrderSort] = useState('asc')
-
-    const {search} = React.useContext(SearchContext)
 
 
     const onChangeCategory = (id) => {
@@ -94,7 +91,10 @@ export const Home = () => {
    
 
    const pizzas = items.map((obj) => (
-    <PizzaBlock key={obj.id} {...obj} />
+    <Link key={obj.id} to={`/pizza/${obj.id}`}>
+      <PizzaBlock  {...obj} />
+    </Link>
+    
     ));
 
   const skeletons = [...new Array(6)].map((_, index)=> <Skeleton key={index}/>);
