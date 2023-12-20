@@ -1,7 +1,12 @@
 import React from 'react'
 import { useState } from 'react';
 
-function Categories({value, onClickCategory}) {
+type CategoriesProps = {
+  value: number;
+  onClickCategory: any;
+};
+
+const Categories: React.FC<CategoriesProps> = ({value, onClickCategory}) => {
   // const [activeIndex, setActiveIndex] = useState(0);
 
   // const activeCategory = (index) => {

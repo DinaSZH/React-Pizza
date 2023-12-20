@@ -8,12 +8,11 @@ import Sort, { sortList } from '../components/Sort';
 import Categories from '../components/Categories';
 import { Skeleton } from '../components/PizzaBlock/Skeleton';
 import Pagination from "../components/Pagination";
-import { SearchContext } from "../App";
 import { useDispatch, useSelector } from "react-redux";
 import { setCategoryId, setCurrentPage, setFilters } from "../redux/slices/filterSlice";
 import { fetchPizzas } from "../redux/slices/pizzasSlice";
 
-export const Home = () => {
+export const Home: React.FC = () => {
   
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -27,20 +26,26 @@ export const Home = () => {
     const [orderSort, setOrderSort] = useState('asc')
 
 
-    const onChangeCategory = (id) => {
-        dispatch(setCategoryId(id))
+    const onChangeCategory = (idx: number) => {
+        dispatch(setCategoryId(idx))
     }
 
-    const onChangePage = (number) => {
-        dispatch(setCurrentPage(number))
+    const onChangePage = (page: number) => {
+        dispatch(setCurrentPage(page))
     }
 
     const getPizzas = async () => {
           const category = categoryId > 0 ? `category=${categoryId}` : ''; 
           const searchValue = search ? `&search=${search}` : ''; 
           
-              dispatch(fetchPizzas({
-                category, searchValue, orderSort, currentPage, sortBy: sort.sortProperty,
+              dispatch(
+                // @ts-ignore
+                fetchPizzas({
+                category, 
+                searchValue, 
+                orderSort, 
+                currentPage, 
+                sortBy: sort.sortProperty,
               }))
         
       }
@@ -90,7 +95,7 @@ export const Home = () => {
 
    
 
-   const pizzas = items.map((obj) => (
+   const pizzas = items.map((obj: any) => (
     <Link key={obj.id} to={`/pizza/${obj.id}`}>
       <PizzaBlock  {...obj} />
     </Link>
@@ -103,7 +108,7 @@ export const Home = () => {
             <div className="container">
             <div className="content__top">
             <Categories value={categoryId} onClickCategory={onChangeCategory}/>
-            <Sort orderSort={orderSort} onClickOrder={(i) => setOrderSort(i)}  />
+            <Sort orderSort={orderSort} onClickOrder={(i: string) => setOrderSort(i)}  />
             </div>
             <h2 className="content__title">Все пиццы</h2>
             

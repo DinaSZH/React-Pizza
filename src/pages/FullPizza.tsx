@@ -3,10 +3,14 @@ import { Link } from 'react-router-dom';
 import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 
-const FullPizza = () => {
+const FullPizza: React.FC  = () => {
   const {id} = useParams();
   const navigate = useNavigate();
-  const [pizza, setPizza] = useState();
+  const [pizza, setPizza] = React.useState<{
+    imageUrl: string;
+    title: string;
+    price: number;
+  }>();
 
   useEffect(() => {
     async function fetchPizza() {
